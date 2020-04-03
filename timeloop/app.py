@@ -9,7 +9,7 @@ from timeloop.helpers import service_shutdown
 
 
 class Timeloop():
-    def __init__(self):
+    def __init__(self, enableLogger=True):
         self.jobs = []
         logger = logging.getLogger('timeloop')
         ch = logging.StreamHandler(sys.stdout)
@@ -18,6 +18,7 @@ class Timeloop():
         ch.setFormatter(formatter)
         logger.addHandler(ch)
         logger.setLevel(logging.INFO)
+        logger.disabled = not enableLogger
         self.logger = logger
 
     def _add_job(self, func, interval, *args, **kwargs):
